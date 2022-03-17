@@ -15300,11 +15300,6 @@ const msOffset = Date.now() - offsetFromDate
 const dayOffset = msOffset / 1000 / 60 / 60 / 24
 const targetWord = targetWords[Math.floor(dayOffset)]
 
-// Import the Google Cloud client library
-//const {BigQuery} = require('@google-cloud/bigquery');
-//const bigquery = new BigQuery();
-//alert(bigquery);
-
 startInteraction()
 
 function startInteraction() {
