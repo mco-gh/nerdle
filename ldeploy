@@ -1,4 +1,0 @@
-set -x
-TAG="gcr.io/mco-cloud-run/wordle"
-docker build . --tag $TAG
-docker run -d -p 8080:8080 $TAG
