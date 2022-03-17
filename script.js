@@ -15455,18 +15455,47 @@ function shakeTiles(tiles) {
   })
 }
 
+function get_date() {
+  var dt = new Date();
+  date = dt.getFullYear().toString().padStart(4, '0')  + "-" +
+         (dt.getMonth()+1).toString().padStart(2, '0') + "-" +
+         dt.getDate().toString().padStart(2, '0')      + " " +
+         dt.getHours().toString().padStart(2, '0')     + ":" +
+         dt.getMinutes().toString().padStart(2, '0')   + ":" +
+         dt.getSeconds().toString().padStart(2, '0');
+  return date;
+}
+
+function bq_insert(guesses, won) {
+  timestamp = get_date();
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://nerdle.run/log", true);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.send(JSON.stringify({
+    timestamp: timestamp,
+    guesses:   guesses,
+    won:       won,
+  }));
+}
+
 function checkWinLose(guess, tiles) {
+  const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
+  let guesses = 6 - (remainingTiles.length / 5);
+  let won = false;
+
   if (guess === targetWord) {
     showAlert("You Win", 5000)
     danceTiles(tiles)
+    won = true; 
     stopInteraction()
+    bq_insert(guesses, won);
     return
   }
 
-  const remainingTiles = guessGrid.querySelectorAll(":not([data-letter])")
   if (remainingTiles.length === 0) {
     showAlert(targetWord.toUpperCase(), null)
     stopInteraction()
+    bq_insert(guesses, won);
   }
 }
 
