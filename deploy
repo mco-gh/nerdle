@@ -1,4 +1,4 @@
-set -x
+PROJ=`gcloud config list --format 'value(core.project)' 2>/dev/null`
 PROJ=mco-general
 APP=nerdle
 TAG="gcr.io/$PROJ/$APP"
@@ -9,6 +9,4 @@ gcloud run deploy "$APP" \
   --platform "managed"   \
   --region "us-central1" \
   --project "$PROJ"      \
-  --concurrency 5        \
-  --memory=1Gi           \
   --allow-unauthenticated
