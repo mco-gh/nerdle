@@ -1,1 +1,2 @@
 Flask
+google-cloud-bigquery==2.28.1
