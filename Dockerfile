@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 WORKDIR /usr/src/app
-ADD /loaderio-eeef6ede4ae688b61da6ad126031492a.txt /usr/src/app
+ADD /loaderio-076c28cc9768845a827bec34e9b3aa9b.txt /usr/src/app
 ADD index.html /usr/src/app
 ADD script.js /usr/src/app
 ADD styles.css /usr/src/app
